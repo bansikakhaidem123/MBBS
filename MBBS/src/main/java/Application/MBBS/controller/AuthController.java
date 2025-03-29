@@ -29,7 +29,10 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String showRegisterPage(Model model) {
+    public String showRegisterPage(Model model, Authentication auth) {
+        if (auth != null && auth.isAuthenticated()) {
+            return "redirect:/home";
+        }
         model.addAttribute("user", new User());
         return "register";
     }
@@ -54,7 +57,7 @@ public class AuthController {
             System.out.println("AUTH NOT NULL");
             if(auth.isAuthenticated())
                 System.out.println("IS AUTHENTICATED");
-                return "redirect:/home";
+            return "redirect:/home";
         }
         System.out.println("RETURNING LOGIN PAGE");
         return "login";
