@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meghalaya State Counselling Authority</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Header Section -->
+<div class="header">
+    <div class="header-content">
+        <img src="/images/ashok_stambh_white.png" alt="National Emblem">
+        <div class="header-text">
+            <h1>MEGHALAYA STATE COUNSELLING AUTHORITY FOR MEDICAL EDUCATION</h1>
+            <h2>GOVERNMENT OF MEGHALAYA</h2>
+        </div>
+    </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="home">Home</a>
+    <a href="login">Login</a>
+</div>
+
+<!-- Login Section -->
+<section class="bg-gray-50 dark:bg-gray-900">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Sign in to your account
+                </h1>
+
+                <!-- Success message -->
+                <p th:if="${success}" class="text-green-600 text-sm text-center font-medium" th:text="${success}"></p>
+
+                <!--  Error message -->
+                <p th:if="${error}" class="text-red-500 text-sm text-center" th:text="${error}"></p>
+
+                <!-- Login Form -->
+                <form class="space-y-4 md:space-y-6" th:action="@{/login}" method="post">
+                    <div class="text-left w-full">
+                        <label for="loginInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email or Phone Number</label>
+                        <input type="text" id="loginInput" name="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600" required>
+                    </div>
+
+                    <div class="text-left w-full">
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600" required>
+                    </div>
+
+                    <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5">Sign in</button>
+                </form>
+
+                <p class="text-sm text-gray-600 dark:text-gray-400 text-center">
+                    Don't have an account? <a href="register" class="text-blue-600 hover:underline">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--footer-->
+<div class="footer">
+    Copyright © 2025 | MSCAMA (Meghalaya State Counselling Authority for Medical Education) | All rights reserved.
+</div>
+
+</body>
+</html>
