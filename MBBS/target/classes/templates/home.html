@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meghalaya State Counselling Authority</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 <!-- Header Section -->
@@ -16,15 +17,29 @@
             <h2>GOVERNMENT OF MEGHALAYA</h2>
         </div>
     </div>
+    <div class="user-info">
+        <i class="fas fa-user mr-2"></i>
+        <span th:text="${fullName}"></span>
+    </div>
 </div>
 
 <!-- Navbar -->
 <div class="navbar">
     <a href="home">Home</a>
     <a href="login">Login</a>
+    <a href="form">Application</a>
     <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
     <!-- Logout Form -->
     <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <div class="welcome-container">
+        <div class="welcome-message">
+            <i class="fas fa-bookmark"></i>
+            <span>Welcome, <span th:text="${fullName}"></span>!</span>
+        </div>
+    </div>
 </div>
 
 <!-- Main Content -->
@@ -55,7 +70,6 @@
             <div class="scrollable-content">
                 <div th:each="admission : ${admissions}" class="card">
                     <div class="card-content">
-<!--                        <h3 class="card-title">Admission</h3>-->
                         <a th:href="@{/admissions/preview/{id}(id=${admission.id})}" class="admission-description-link" target="_blank">
                             <p class="card-text" th:text="${admission.dDescription}"></p>
                         </a>
@@ -112,9 +126,7 @@
                                 <span th:text="'PR No: ' + ${notification.id}"></span>
                             </div>
                             <div>
-<!--                                <h3 class="card-title" th:text="${notification.dType}"></h3>-->
                                 <p class="card-text" th:text="${notification.dDescription}"></p>
-<!--                                <span class="badge badge-urgent">Urgent</span>-->
                             </div>
                         </div>
                     </a>

@@ -1,7 +1,9 @@
 package Application.MBBS.controller;
 
 import Application.MBBS.entity.Documents;
+import Application.MBBS.entity.User;
 import Application.MBBS.service.DocumentsService;
+import Application.MBBS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,19 +27,31 @@ import java.nio.file.Paths;
 @Controller
 public class HomeController {
 
-    @Autowired
+
+    private final UserService userService;
     private DocumentsService documentsService;
 
-    public HomeController(DocumentsService documentsService) {
+    public HomeController(DocumentsService documentsService,UserService userService) {
         this.documentsService = documentsService;
+        this.userService = userService;
     }
 
     @GetMapping("/home")
-    public String showHomePage(Model model) {
+    public String showHomePage(Model model, Authentication authentication) {
         model.addAttribute("admissions", documentsService.getLatestAdmissions());
         model.addAttribute("notifications", documentsService.getLatestNotifications());
-        return "home"; // This should match a Thymeleaf template in src/main/resources/templates
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            User user = userService.findByEmail(authentication.getName());
+            if (user != null) {
+                model.addAttribute("firstName", user.getFirstName());
+                model.addAttribute("lastName", user.getLastName());
+                model.addAttribute("fullName", user.getFirstName() + " " + user.getLastName());
+            }
+        }
+        return "home";
     }
+
 
     @GetMapping("/admissions")
     public String showAdmissionsPage(Model model) {

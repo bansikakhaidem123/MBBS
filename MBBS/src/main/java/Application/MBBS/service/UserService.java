@@ -19,14 +19,17 @@ public class UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null); // Return user or null
+    }
 
 
     public User findByEmailOrPhone(String emailOrPhone) {
         if (emailOrPhone.contains("@")) {
-            System.out.println("Foung email");
+            System.out.println("Found email");
             return userRepository.findByEmail(emailOrPhone).orElse(null);
         } else {
-            System.out.println("Foung phone");
+            System.out.println("Found phone");
             return userRepository.findByPhoneNo(emailOrPhone).orElse(null);
         }
     }

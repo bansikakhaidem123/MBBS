@@ -51,7 +51,7 @@ public class SecurityConfig {
 //                        .requestMatchers("/sno/").hasRole("SNO")
 //                        .requestMatchers("/rd/").hasRole("RD")
 //                        .requestMatchers("/resources/", "/static/", "/assets/","/css/","img/","js/","jquery-3.6.0/").permitAll()
-                        .requestMatchers("/login","/register","/api/**").permitAll() //,"/","/about"
+                        .requestMatchers("/login","/register","/home","/api/**").permitAll() //,"/","/about"
                         //						.requestMatchers().permitAll()
                                 .requestMatchers("/css/**", "/images/**").permitAll()
                         .anyRequest()

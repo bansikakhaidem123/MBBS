@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/CSS/styles.css}">
+</head>
+<body class="min-h-screen bg-gray-100 py-8 px-4">
+<!-- Header Section -->
+<div class="header">
+    <div class="header-content">
+        <img src="/images/ashok_stambh_white.png" alt="National Emblem">
+        <div class="header-text">
+            <h1>MEGHALAYA STATE COUNSELLING AUTHORITY FOR MEDICAL EDUCATION</h1>
+            <h2>GOVERNMENT OF MEGHALAYA</h2>
+        </div>
+    </div>
+    <div class="user-info">
+        <i class="fas fa-user mr-2"></i>
+        <span th:text="${fullName}"></span>
+    </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="home">Home</a>
+    <a href="login">Login</a>
+    <a href="form">Application</a>
+    <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+    <!-- Logout Form -->
+    <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <div class="welcome-container">
+        <div class="welcome-message">
+            <i class="fas fa-bookmark"></i>
+            <span>Welcome, <span th:text="${fullName}"></span>!</span>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-4xl mx-auto">
+    <form id="courseForm" class="space-y-8">
+        <div class="grid grid-cols-2 gap-8">
+            <!-- Courses Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-gray-200 p-2 rounded-md mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Select Course</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="course-MBBS-SMC" name="course" value="MBBS-SMC" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        <label for="course-MBBS-SMC" class="ml-3 text-gray-700">MBBS-SMC</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="course-MBBS-PIMC" name="course" value="MBBS-PIMC" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        <label for="course-MBBS-PIMC" class="ml-3 text-gray-700">MBBS-PIMC</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="course-BAMS-PIMC" name="course" value="BAMS-PIMC" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+                        <label for="course-BAMS-PIMC" class="ml-3 text-gray-700">BAMS-PIMC</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-gray-200 p-2 rounded-md mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Select Category</h2>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <select id="category-MBBS-SMC" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" disabled>
+                            <option value="">Select a category for MBBS-SMC</option>
+                            <option value="AIQ">AIQ</option>
+                            <option value="Garo Tribe">Garo Tribe</option>
+                            <option value="Khasi & Jaintia tribes">Khasi & Jaintia tribes</option>
+                            <option value="Unreserved (UR)">Unreserved (UR)</option>
+                            <option value="Other Scheduled tribes (OST)/Other Schedule Caste (OSC)">Other Scheduled tribes (OST)/Other Schedule Caste (OSC)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select id="category-MBBS-PIMC" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" disabled>
+                            <option value="">Select a category for MBBS-PIMC</option>
+                            <option value="AIQ">AIQ</option>
+                            <option value="Garo Tribe">Garo Tribe</option>
+                            <option value="Khasi & Jaintia tribes">Khasi & Jaintia tribes</option>
+                            <option value="Unreserved (UR)">Unreserved (UR)</option>
+                            <option value="Other Scheduled tribes (OST)/Other Schedule Caste (OSC)">Other Scheduled tribes (OST)/Other Schedule Caste (OSC)</option>
+                            <option value="NRI">NRI</option>
+                            <option value="Management">Management</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select id="category-BAMS-PIMC" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" disabled>
+                            <option value="">Select a category for BAMS-PIMC</option>
+                            <option value="AIQ">AIQ</option>
+                            <option value="Garo Tribe">Garo Tribe</option>
+                            <option value="Khasi & Jaintia tribes">Khasi & Jaintia tribes</option>
+                            <option value="Unreserved (UR)">Unreserved (UR)</option>
+                            <option value="Other Scheduled tribes (OST)/Other Schedule Caste (OSC)">Other Scheduled tribes (OST)/Other Schedule Caste (OSC)</option>
+                            <option value="NRI">NRI</option>
+                            <option value="Management">Management</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Button -->
+        <div class="flex justify-center">
+            <button type="submit" id="nextButton" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors" disabled>
+                Next
+            </button>
+        </div>
+    </form>
+</div>
+<!--footer-->
+<div class="footer">
+    Copyright © 2025 | MSCAMA (Meghalaya State Counselling Authority for Medical Education) | All rights reserved.
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const nextButton = document.getElementById('nextButton');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const categorySelect = document.getElementById(`category-${this.value}`);
+                categorySelect.disabled = !this.checked;
+                if (!this.checked) {
+                    categorySelect.value = '';
+                }
+                updateNextButtonState();
+            });
+        });
+
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', updateNextButtonState);
+        });
+
+        function updateNextButtonState() {
+            const hasSelectedCourse = Array.from(checkboxes).some(cb => cb.checked);
+            const hasSelectedCategory = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .every(cb => document.getElementById(`category-${cb.value}`).value !== '');
+
+            nextButton.disabled = !(hasSelectedCourse && hasSelectedCategory);
+        }
+    });
+</script>
+</body>
+</html>

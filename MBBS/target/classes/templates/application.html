@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBBS/BAMS Admission Application - Medical Studies Council of Meghalaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/CSS/styles.css}">
+</head>
+<body>
+<div class="header">
+    <div class="header-content">
+        <img src="/images/ashok_stambh_white.png" alt="National Emblem">
+        <div class="header-text">
+            <h1>MEGHALAYA STATE COUNSELLING AUTHORITY FOR MEDICAL EDUCATION</h1>
+            <h2>GOVERNMENT OF MEGHALAYA</h2>
+        </div>
+    </div>
+    <div class="user-info">
+        <i class="fas fa-user mr-2"></i>
+        <span th:text="${fullName}"></span>
+    </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="home">Home</a>
+    <a href="login">Login</a>
+    <a href="form">Application</a>
+    <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+    <!-- Logout Form -->
+    <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
+</div>
+
+<main>
+    <div class="form-container">
+        <div class="steps">
+            <div class="step-line"></div>
+            <div class="step active">
+                <div class="step-number">1</div>
+                <span>Personal Info</span>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <span>Academic Details</span>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <span>Preferences</span>
+            </div>
+        </div>
+
+        <form id="admissionForm">
+            <div class="form-section active" id="step1">
+                <h2>Personal Information</h2>
+                <div class="personal-info-wrapper">
+<!--                    <div class="form-grid">-->
+                    <div class="personal-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" id="dob" name="dob" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                            <div class="address-section">
+                                <h3>Communication Address</h3>
+                                <textarea id="commAddress" name="commAddress" rows="3"
+                                          placeholder="Enter your communication address" required></textarea>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="commPincode">Pincode</label>
+                                        <input type="text" id="commPincode" name="commPincode" pattern="[0-9]{6}"
+                                               title="Please enter a valid 6-digit pincode" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="commState">State</label>
+                                        <input type="text" id="commState" name="commState" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <div class="address-section">
+                                <h3>Permanent Address</h3>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="sameAsComm" name="sameAsComm">
+                                    <label for="sameAsComm">Same as Communication Address</label>
+                                </div>
+                                <textarea id="permAddress" name="permAddress" rows="3"
+                                          placeholder="Enter your permanent address" required></textarea>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="permPincode">Pincode</label>
+                                        <input type="text" id="permPincode" name="permPincode" pattern="[0-9]{6}"
+                                               title="Please enter a valid 6-digit pincode" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="permState">State</label>
+                                        <input type="text" id="permState" name="permState" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                    </div>-->
+                </div>
+            </div>
+
+
+            <div class="form-section" id="step2">
+                <h2>Academic Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tenthPercentage">10th Percentage</label>
+                        <input type="number" id="tenthPercentage" name="tenthPercentage" min="0" max="100" step="0.01"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="twelfthPercentage">12th Percentage</label>
+                        <input type="number" id="twelfthPercentage" name="twelfthPercentage" min="0" max="100"
+                               step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neetScore">NEET Score</label>
+                        <input type="number" id="neetScore" name="neetScore" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neetPercentile">NEET Percentile</label>
+                        <input type="number" id="neetPercentile" name="neetPercentile" min="0" max="100" step="0.01"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neetRank">NEET Rank</label>
+                        <input type="number" id="neetRank" name="neetRank" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" id="step3">
+                <h2>College Preferences</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="quota">Quota</label>
+                        <select id="quota" name="quota" required>
+                            <option value="">Select Quota</option>
+                            <option value="state">State Quota</option>
+                            <option value="management">Management Quota</option>
+                            <option value="nri">NRI Quota</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <div class="notice">
+                            <svg class="notice-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <div class="notice-content">
+                                <h3>Important Notice</h3>
+                                <p>Please ensure all information provided is accurate. Any discrepancy may lead to
+                                    disqualification.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-prev" id="prevBtn" style="display: none;">Previous</button>
+                <button type="button" class="btn-next" id="nextBtn">Next</button>
+                <button type="submit" class="btn-submit" id="submitBtn" style="display: none;">Submit Application
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!--footer-->
+<div class="footer">
+    Copyright © 2025 | MSCAMA (Meghalaya State Counselling Authority for Medical Education) | All rights reserved.
+</div>
+
+<script>
+    let currentStep = 1;
+    const form = document.getElementById('admissionForm');
+    const steps = document.querySelectorAll('.step');
+    const sections = document.querySelectorAll('.form-section');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Address copy functionality
+    const sameAsCommCheckbox = document.getElementById('sameAsComm');
+    const commAddress = document.getElementById('commAddress');
+    const permAddress = document.getElementById('permAddress');
+    const commPincode = document.getElementById('commPincode');
+    const permPincode = document.getElementById('permPincode');
+    const commState = document.getElementById('commState');
+    const permState = document.getElementById('permState');
+
+    sameAsCommCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        permAddress.value = commAddress.value;
+        permPincode.value = commPincode.value;
+        permState.value = commState.value;
+
+        permAddress.disabled = true;
+        permPincode.disabled = true;
+        permState.disabled = true;
+      } else {
+        permAddress.disabled = false;
+        permPincode.disabled = false;
+        permState.disabled = false;
+      }
+    });
+
+    commAddress.addEventListener('input', function() {
+      if (sameAsCommCheckbox.checked) {
+        permAddress.value = this.value;
+      }
+    });
+
+    commPincode.addEventListener('input', function() {
+      if (sameAsCommCheckbox.checked) {
+        permPincode.value = this.value;
+      }
+    });
+
+    commState.addEventListener('input', function() {
+      if (sameAsCommCheckbox.checked) {
+        permState.value = this.value;
+      }
+    });
+
+    function showStep(step) {
+      sections.forEach(section => section.classList.remove('active'));
+      steps.forEach(s => s.classList.remove('active'));
+
+      document.getElementById(`step${step}`).classList.add('active');
+      steps[step - 1].classList.add('active');
+
+      prevBtn.style.display = step === 1 ? 'none' : 'block';
+      nextBtn.style.display = step === 3 ? 'none' : 'block';
+      submitBtn.style.display = step === 3 ? 'block' : 'none';
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < 3) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      console.log('Form submitted:', data);
+      alert('Application submitted successfully!');
+    });
+</script>
+</body>
+</html>
